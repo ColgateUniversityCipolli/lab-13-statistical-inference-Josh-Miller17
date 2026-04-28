@@ -174,7 +174,7 @@ Summary <- data |>
 print(Summary)
 ```
 
-Solution: The mean dopamine change for the further data is -.213% with a standard deviation of 0.134. Because the value is negative the data suggests that dopamine of zebra finches decreases when they sing further away from their target song. The mean dopamine change for the closer data is 0.178% and the standard deviation is 0.09, meaning that this suggests that dopamine of zebra finches increases when they sing closer to from their target song. The mean for the differenced data is 0.391% with a standard deviation of 0.214. Because the mean is positive and is substantially different from zero (0.214<0.391), the data show there is a strong difference in dopamine  based on distance from the target song.
+Solution: The mean dopamine change for the further data is -.213 with a standard deviation of 0.134. Because the value is negative the data suggests that dopamine of zebra finches decreases when they sing further away from their target song. The mean dopamine change for the closer data is 0.178 and the standard deviation is 0.09, meaning that this suggests that dopamine of zebra finches increases when they sing closer to from their target song. The mean for the differenced data is 0.391 with a standard deviation of 0.214. Because the mean is positive and is substantially different from zero (0.214<0.391), the data show there is a strong difference in dopamine  based on distance from the target song.
 
 ## Part d
 Conduct the inferences they do in the paper. Make sure to report the results a little more comprehensively -- that is your parenthetical should look something like: ($t=23.99$, $p<0.0001$; $g=1.34$; 95% CI: 4.43, 4.60). Ensure to verify any conditions for use.\
