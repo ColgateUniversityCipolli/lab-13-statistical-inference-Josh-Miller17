@@ -116,6 +116,7 @@ Using the `pwr` package for \texttt{R} [@pwr], conduct a power analysis. How man
 
 Solution:
 ```{r}
+#| size: scriptsize
 library(pwr)
 
 # did power analysis using the t.test() function
@@ -132,6 +133,22 @@ The number of obsservations the researchers would need to detect a moderate-to-l
 
 ## Part b
 Click the link to go to the paper. Find the source data for Figure 2. Download the Excel file. Describe what you needed to do to collect the data for Figure 2(g). Note that you only need the `closer_vals` and `further_vals`. Ensure to `mutate()` the data to get a difference (e.g., `closer_vals - further_vals`).
+
+Solution:
+```{r}
+#| size: scriptsize
+library(dplyr)
+
+# loaded the csv file and saved it as data
+data <- read.csv("zebra_finch.csv")
+
+# calculated the differences from g_closer to g_farther
+data <- data |>
+  mutate(dopamine_diff = G_Closer_vals - G_Farther_vals)
+
+```
+
+Solution: In order to collect the data for Figure 2(g), I had to go to the website, scroll down to figure 2, clicked the source data link. I downloaded the source data as an excel file. I then took the two tabs labeled g_farther vals and g_closer vals and combined them into a new tab on the excel file where I made each tab its own column. I then downloaded it as a csv file, moved the csv into my lab folder and had it read into r. I then just created a column for the difference between columns 1 and 2 using the mutate function.
 
 ## Part c
 Summarize the data.
