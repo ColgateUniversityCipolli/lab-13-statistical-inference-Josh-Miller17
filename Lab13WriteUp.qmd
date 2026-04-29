@@ -221,4 +221,56 @@ to highlight the rejection region and the $p$-value. Additionally, add the
 resampling distribution for $T$ to the chart to demonstrate any differences 
 between the null distribution and the distribution suggested by the data.
 
+```{r}
+#| label: fig-null-t-distributions
+#| fig-cap: "Null T-Distribution vs. Resampling Distribution"
+#| fig-width: 5
+#| fig-height: 3
+#| scale: "80%"
+#| fig-align: "center"
+#| size: scriptsize
+
+library(ggplot2)
+
+# resampling portion ()
+R <- 1000
+t_nulls <- rep(NA, R)
+
+# subtract mean to force the null hyp to be true 
+null_data <- data$dopamine_diff - mean(data$dopamine_diff)
+
+# Bootstrapping process
+set.seed(42) # made it so the answers were repeatable, even though, they're random
+for(i in 1:R){
+  current_sample <- sample(null_data, size=nrow(data), replace=TRUE)
+  # We calculate the t-statistic for each bootstrap sample
+  t_nulls[i] <- mean(current_sample) / (sd(current_sample) / sqrt(length(current_sample)))
+}
+resample_df <- data.frame(t_stat = t_nulls)
+
+# created null distribution
+df_val <- nrow(data) - 1
+x_seq <- seq(-10, 10, length.out = 1000)
+null <- data.frame(x = x_seq, y = dt(x_seq, df = df_val))
+
+# took t-stat from part d
+obs_t_stat <- mean(data$dopamine_diff) / (sd(data$dopamine_diff) / sqrt(nrow(data)))
+
+# created plot
+ggplot() +
+  # theoretical T-distribution curve
+  geom_line(data = null, aes(x = x, y = y), color = "black", size = 1) +
+  # highlighted rejection regions
+  geom_ribbon(data = subset(null, x > qt(0.975, df_val)),
+              aes(x = x, ymax = y), ymin = 0, fill = "darkorchid2", alpha = 0.5) +
+  geom_ribbon(data = subset(null, x < qt(0.025, df_val)),
+              aes(x = x, ymax = y), ymin = 0, fill = "darkorchid2", alpha = 0.5) +
+  # resampling/bootstrapping distribution
+  geom_density(data = resample_df, aes(x = t_stat), fill = "gray", alpha = 0.4) +
+  # plotted observed t-statistic
+  geom_vline(xintercept = obs_t_stat, color = "blue", linetype = "dashed", size = 1) +
+  labs(x = "t-statistic", y = "Density") +
+  theme_bw()
+```
+
 
