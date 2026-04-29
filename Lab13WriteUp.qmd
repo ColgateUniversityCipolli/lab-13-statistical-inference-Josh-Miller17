@@ -187,6 +187,32 @@ Conduct the inferences they do in the paper. Make sure to report the results a l
 * "The difference between populations was significant ($p=1.04 \times10^{-8}$).''\
 **Note**: Use the two-sided test.
 
+Solution: The conditions for use are independent observations and that the sampling distribution of the mean is approximately gaussian because of the small sample size.
+
+```{r}
+#| size: scriptsize
+
+# Close responses t-test (one-sided)
+t_close <- t.test(data$G_Closer_vals, mu = 0, alternative = "greater")
+
+# Far responses (one-sided)
+t_far <- t.test(data$G_Farther_vals, mu = 0, alternative = "less")
+
+# Difference (two-sided)
+t_diff <- t.test(data$dopamine_diff, mu = 0, alternative = "two.sided")
+
+t_close
+t_far
+t_diff
+```
+
+Close responses: (t = 9.16, $p = 1.33 \times 10^{-9}$; g = 1.83; 95% CI: 0.145, infinity)
+
+Far responses: (t = -7.92, $p = 1.87 \times 10^{-8}$; g = 1.58; 95% CI: -infinity, -0.167)
+
+Diff: (t = 9.14, $p = 2.75 \times 10^{-9}$; g = 1.83; 95% CI: 0.303, 0.480)
+
+
 ## Part e 
 
 For each hypothesis test in the previous question, plot the null $T$ 
